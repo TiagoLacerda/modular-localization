@@ -1,39 +1,89 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# modular_localization
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+A tool for generating string localizations.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+modular_localization is built with modularity and intellisense in mind.
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+First, ensure the following is in your pubspec.yaml:
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  modular_localization: ^1.0.0    
 ```
 
-## Additional information
+Then, import the flutter_localizations and the modular_localization libraries and specify localizationDelegates and supportedLocales for you application:
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+import 'package:modular_localization/modular_localization.dart';
+
+return const MaterialApp(
+  title: 'Modular Localization Sample App',
+  localizationsDelegates: [
+    ModularLocalization.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ],
+  supportedLocales: [
+    Locale('en-US'),
+    Locale('pt-BR'),
+  ],
+  home: MyHomePage(),
+);
+```
+
+Now, write some .json files for your localized strings:
+
+```json
+en-US.json
+{
+    "greeting": "Welcome, %s, to planet",
+    "worlds": {
+        "earth": "Earth",
+        "mars": "Mars",
+    }
+}
+```
+
+```json
+pt-BR.json
+{
+    "greeting": "Bem-vindo, %s, ao planeta",
+    "worlds": {
+        "earth": "Terra",
+        "mars": "Marte",
+    }
+}
+```
+
+## How to run
+
+Depend on the package then run `dart run modular_localization [source directory] [target directory]`
+
+You can optionally specify a source (`l10n` by default) and target (`l10n/generated`) directories, that is, where your .json files are and where your .dart files will go.
+
+Now, all you have to do is import the generated `ModularLocalization` class and refer to the generated localizations:
+
+```dart
+import 'package:flutter/material.dart';
+
+import '<target directory>/modular_localization.dart';
+
+class MyWidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    var greeting = ModularLocalization.localizations.hello(context, ['Han Solo']);
+    var world = ModularLocalization.localizations.worlds.earth(context);
+    return Text('$greeting $world!'); // 'Welcome, Han Solo, to planet Earth!' or 'Bem-vindo, Han Solo, ao planeta Terra!' depending on the device's target Locale.
+  }
+}
+```
+
+## Limitations
+
++ Because of [how the Localizations widget works](https://docs.flutter.dev/accessibility-and-localization/internationalization), to ensure the application will rebuild where needed after changing the device's Locale, it is necessary to pass the BuildContext. If you do not care about Locale changes while the app is running, you can ommit the BuildContext.

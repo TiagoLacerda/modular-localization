@@ -1,13 +1,17 @@
 name: modular_localization
-description: A starting point for Dart libraries or applications.
+
+description: A tool for generating string localizations.
+
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+
+repository: https://github.com/TiagoLacerda/modular-localization
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: ">=2.19.6 <3.0.0"
 
-# dependencies:
-#   path: ^1.8.0
+dependencies:
+  flutter:
+    sdk: flutter
 
 dev_dependencies:
   lints: ^2.0.0
