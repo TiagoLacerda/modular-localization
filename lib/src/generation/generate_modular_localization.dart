@@ -8,12 +8,15 @@ import 'package:flutter/widgets.dart';
 
 import 'modular_localization_delegate.dart';
 import 'modular_localization_entries.dart';
+import 'modular_localization_entries_${metadata.supportedLocales.first.toSnakeCase()}.dart';
 
 abstract class ModularLocalization {
   const ModularLocalization();
 
+  static ModularLocalizationEntries entries = const ModularLocalizationEntries${metadata.supportedLocales.first.toPascalCase()}();
+
   /// modular_localization's `LocalizationsDelegate`.
-  static final delegate = ModularLocalizationDelegate();
+  static const delegate = ModularLocalizationDelegate();
 
   /// Localized resources.
   static const ModularLocalizationInternalClass0 localizations =
@@ -106,8 +109,8 @@ void addValue(Value value, int index, StringBuffer buffer) {
 
   // GETTER / METHOD
   var field = value.immutable
-      ? '  String ${value.label}([BuildContext? context]) => (ModularLocalizationEntries.of(context) ?? ModularLocalization.delegate.fallback).entry$index;'
-      : '  String ${value.label}([BuildContext? context, List<String> args = const []]) => (ModularLocalizationEntries.of(context) ?? ModularLocalization.delegate.fallback).entry$index(args);';
+      ? '  String ${value.label}([BuildContext? context]) => (ModularLocalizationEntries.of(context) ?? ModularLocalization.entries).entry$index;'
+      : '  String ${value.label}([BuildContext? context, List<String> args = const []]) => (ModularLocalizationEntries.of(context) ?? ModularLocalization.entries).entry$index(args);';
 
   buffer.writeln(field);
 }
