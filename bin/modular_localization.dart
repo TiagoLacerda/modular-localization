@@ -9,8 +9,8 @@ import 'package:modular_localization/src/metadata.dart';
 
 void main(List<String> args) {
   // DEFINE DIRECTORIES WHERE FILES WILL BE LOADED FROM AND SAVED TO
-  var source = args.isNotEmpty ? args[0] : 'l10n';
-  var target = args.length > 1 ? args[1] : 'l10n/generated';
+  var source = args.isNotEmpty ? args[0] : 'lib/l10n';
+  var target = args.length > 1 ? args[1] : 'lib/l10n/generated';
 
   // INITIALIZE METADATA
   var metadata = Metadata(
