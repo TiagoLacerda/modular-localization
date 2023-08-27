@@ -86,6 +86,11 @@ void addGroup(Group group, int groupIndex, StringBuffer buffer) {
     }
   }
 
+  for (var group in group.groups) {
+    buffer.writeln('  /// **.${group.label}**: `...`');
+    buffer.writeln('  ///');
+  }
+
   // METHOD
   buffer.writeln(
     '  ModularLocalizationInternalClass$groupIndex get ${group.label} => const ModularLocalizationInternalClass$groupIndex();',
