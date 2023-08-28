@@ -37,6 +37,8 @@ return const MaterialApp(
 );
 ```
 
+You can also use your favorite state management solution to change the app's locale while running, by passing it in the MaterialApp's `locale` parameter and rebuilding the widget whenever the locale changes.
+
 Now, write some .json files for your localized strings:
 
 ```json
@@ -65,7 +67,7 @@ pt-BR.json
 
 Depend on the package then run `dart run modular_localization [source directory] [target directory]`
 
-You can optionally specify a source (`l10n` by default) and target (`l10n/generated`) directories, that is, where your .json files are and where your .dart files will go.
+You can optionally specify a source (`lib/l10n` by default) and target (`lib/l10n/generated`) directories, that is, where your .json files are and where your .dart files will go.
 
 Now, all you have to do is import the generated `ModularLocalization` class and refer to the generated localizations:
 
@@ -77,8 +79,8 @@ import '<target directory>/modular_localization.dart';
 class MyWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    var greeting = ModularLocalization.localizations.hello(context, ['Han Solo']);
-    var world = ModularLocalization.localizations.worlds.earth(context);
+    var greeting = ModularLocalization.localizations.hello(['Han Solo']);
+    var world = ModularLocalization.localizations.worlds.earth;
     return Text('$greeting $world!'); // 'Welcome, Han Solo, to planet Earth!' or 'Bem-vindo, Han Solo, ao planeta Terra!' depending on the device's target Locale.
   }
 }
@@ -86,7 +88,5 @@ class MyWidget extends StatelessWidget{
 
 ## Limitations
 
-+ Because of [how the Localizations widget works](https://docs.flutter.dev/accessibility-and-localization/internationalization), to ensure the application will rebuild where needed after changing the device's Locale, it is necessary to pass the BuildContext. If you do not care about Locale changes while the app is running, you can ommit the BuildContext.
-
-
-Remove the option to pass context and see if, enveloping AppWidget in GetBuilder, I can still change the locale.
++ Because of [how the Localizations widget works](https://docs.flutter.dev/accessibility-and-localization/internationalization), locale changes triggered by changing the system's locale might not reflect in updating the localization strings.
++ Your application must support at least one locale, even if it has no localized strings. That means setting up the locale.json file.
