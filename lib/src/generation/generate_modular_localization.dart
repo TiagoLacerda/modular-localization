@@ -4,8 +4,6 @@ String generateModularLocalization(Metadata metadata) {
   var internalClasses = generateInternalClasses(metadata);
 
   return """
-import 'package:flutter/widgets.dart';
-
 import 'modular_localization_delegate.dart';
 import 'modular_localization_entries.dart';
 import 'modular_localization_entries_${metadata.supportedLocales.first.toSnakeCase()}.dart';
@@ -113,8 +111,8 @@ void addValue(Value value, int index, StringBuffer buffer) {
 
   // GETTER / METHOD
   var field = value.immutable
-      ? '  String ${value.label}([BuildContext? context]) => (ModularLocalizationEntries.of(context) ?? ModularLocalization.entries).entry$index;'
-      : '  String ${value.label}([BuildContext? context, List<String> args = const []]) => (ModularLocalizationEntries.of(context) ?? ModularLocalization.entries).entry$index(args);';
+      ? '  String get ${value.label} => ModularLocalization.entries.entry$index;'
+      : '  String ${value.label}([List<String> args = const []]) => ModularLocalization.entries.entry$index(args);';
 
   buffer.writeln(field);
 }

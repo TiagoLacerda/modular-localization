@@ -27,15 +27,8 @@ String generateModularLocalizationEntries(
   return """
 import 'dart:math';
 
-import 'package:flutter/widgets.dart';
-
 abstract class ModularLocalizationEntries {
   const ModularLocalizationEntries();
-
-  static ModularLocalizationEntries? of(BuildContext? context) {
-    if(context == null) return null;
-    return Localizations.of<ModularLocalizationEntries>(context, ModularLocalizationEntries);
-  }
 
   /// Replaces matches of `RegExp(r'%s')` with given [arguments].
   ///
