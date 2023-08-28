@@ -87,8 +87,8 @@ String generateModularLocalizationEntriesForLocale(
 
     // GETTER / METHOD
     var field = value.immutable
-        ? '  String get entry$i => r$quotes$entry$quotes;'
-        : '  String entry$i([List<String> args = const []]) => replaceArguments(r$quotes$entry$quotes, args);';
+        ? '  String get entry$i => $quotes$entry$quotes;'
+        : '  String entry$i([List<String> args = const []]) => replaceArguments($quotes$entry$quotes, args);';
 
     fields.add(override + docstring + field);
   }
