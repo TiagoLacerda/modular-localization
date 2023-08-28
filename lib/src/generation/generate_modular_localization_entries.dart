@@ -13,7 +13,10 @@ String generateModularLocalizationEntries(
     var value = values[i];
 
     // FIELD DOCUMENTATION
-    var docstring = value.entries.keys.map((e) => '  /// `$e`: **"${value.entries[e]}"**\n').toList().join('  ///\n');
+    var docstring = value.entries.keys
+        .map((e) => '  /// `$e`: **"${value.entries[e]!.replaceAll('\n', '\\n')}"**\n')
+        .toList()
+        .join('  ///\n');
 
     // GETTER / METHOD
     var field = value.immutable ? '  String get entry$i;' : '  String entry$i([List<String> args = const []]);';
@@ -73,21 +76,19 @@ String generateModularLocalizationEntriesForLocale(
   for (int i = 0; i < values.length; i++) {
     var value = values[i];
 
+    var quotes = value.entries[locale]!.contains('\'') ? '"' : "'";
+
     var override = '  @override\n';
 
+    var entry = value.entries[locale]!.replaceAll('\n', '\\n');
+
     // FIELD DOCUMENTATION
-    var docstring = '  /// **"${value.entries[locale]}"**\n';
-
-    var quotes = '\'';
-
-    if (value.entries[locale]!.contains('\'')) {
-      quotes = '"';
-    }
+    var docstring = '  /// **"$entry"**\n';
 
     // GETTER / METHOD
     var field = value.immutable
-        ? '  String get entry$i => r$quotes${value.entries[locale]}$quotes;'
-        : '  String entry$i([List<String> args = const []]) => replaceArguments(r$quotes${value.entries[locale]}$quotes, args);';
+        ? '  String get entry$i => r$quotes$entry$quotes;'
+        : '  String entry$i([List<String> args = const []]) => replaceArguments(r$quotes$entry$quotes, args);';
 
     fields.add(override + docstring + field);
   }
