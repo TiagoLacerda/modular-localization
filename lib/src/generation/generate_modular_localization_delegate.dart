@@ -8,7 +8,7 @@ String generateModularLocalizationDelegate(Metadata metadata) {
 
   // LOAD METHOD'S SWITCH CASES
   var cases = metadata.supportedLocales.map(
-    (locale) => "      case '$locale':\n        entries = const ModularLocalizationEntries${locale.toPascalCase()}();",
+    (locale) => "      case '$locale':\n        entries = const ModularLocalizationEntries${locale.toPascalCase()}();\n        break;",
   );
 
   // SUPPORTED LOCALES

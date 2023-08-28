@@ -30,8 +30,8 @@ return const MaterialApp(
     GlobalCupertinoLocalizations.delegate,
   ],
   supportedLocales: [
-    Locale('en-US'),
-    Locale('pt-BR'),
+    Locale('en', 'US'),
+    Locale('pt', 'BR'),
   ],
   home: MyHomePage(),
 );
@@ -87,3 +87,6 @@ class MyWidget extends StatelessWidget{
 ## Limitations
 
 + Because of [how the Localizations widget works](https://docs.flutter.dev/accessibility-and-localization/internationalization), to ensure the application will rebuild where needed after changing the device's Locale, it is necessary to pass the BuildContext. If you do not care about Locale changes while the app is running, you can ommit the BuildContext.
+
+
+Remove the option to pass context and see if, enveloping AppWidget in GetBuilder, I can still change the locale.
