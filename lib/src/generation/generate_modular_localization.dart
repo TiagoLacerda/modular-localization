@@ -84,7 +84,9 @@ void addGroup(Group group, int groupIndex, StringBuffer buffer) {
     buffer.writeln('  ///');
 
     for (var locale in value.entries.keys) {
-      buffer.writeln('  /// `$locale`: **"${value.entries[locale]}"**');
+      var entry = value.entries[locale]!.replaceAll('\n', '\\n');
+
+      buffer.writeln('  /// `$locale`: **"$entry"**');
       buffer.writeln('  ///');
     }
   }
@@ -103,7 +105,9 @@ void addGroup(Group group, int groupIndex, StringBuffer buffer) {
 void addValue(Value value, int index, StringBuffer buffer) {
   // FIELD DOCUMENTATION
   for (var locale in value.entries.keys) {
-    buffer.writeln('  /// `$locale`: **"${value.entries[locale]}"**');
+    var entry = value.entries[locale]!.replaceAll('\n', '\\n');
+
+    buffer.writeln('  /// `$locale`: **"$entry"**');
     buffer.writeln('  ///');
   }
 
