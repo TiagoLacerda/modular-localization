@@ -1,0 +1,7 @@
+{
+    "greeting": "Olá, gostaria de uma xícara de %s?",
+    "drinks": {
+        "tea": "chá",
+        "coffee": "café"
+    }
+}

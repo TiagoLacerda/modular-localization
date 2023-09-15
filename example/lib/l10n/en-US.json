@@ -1,0 +1,7 @@
+{
+    "greeting": "Hi, would you care for a cup of %s?",
+    "drinks": {
+        "tea": "tea",
+        "coffee": "coffee"
+    }
+}
