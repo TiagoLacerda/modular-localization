@@ -14,12 +14,15 @@ String generateModularLocalizationEntries(
 
     // FIELD DOCUMENTATION
     var docstring = value.entries.keys
-        .map((e) => '  /// `$e`: **"${value.entries[e]!.replaceAll('\n', '\\n')}"**\n')
+        .map((e) =>
+            '  /// `$e`: **"${value.entries[e]!.replaceAll('\n', '\\n')}"**\n')
         .toList()
         .join('  ///\n');
 
     // GETTER / METHOD
-    var field = value.immutable ? '  String get entry$i;' : '  String entry$i([List<String> args = const []]);';
+    var field = value.immutable
+        ? '  String get entry$i;'
+        : '  String entry$i([List<String> args = const []]);';
 
     fields.add(docstring + field);
   }

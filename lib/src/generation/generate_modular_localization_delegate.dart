@@ -16,7 +16,8 @@ String generateModularLocalizationDelegate(Metadata metadata) {
 
   // SUPPORTED LOCALES
   var supportedLocales = metadata.supportedLocales.map((locale) {
-    var string = '    Locale.fromSubtags(languageCode: \'${locale.languageCode}\'';
+    var string =
+        '    Locale.fromSubtags(languageCode: \'${locale.languageCode}\'';
 
     if (locale.scriptCode != null) {
       string += ', scriptCode: \'${locale.scriptCode}\'';
