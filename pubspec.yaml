@@ -1,6 +1,6 @@
 name: modular_localization
 
-version: 1.0.0+2
+version: 1.0.1
 
 description: A tool for generating string localizations, supporting modularization and IntelliSense integration.
 
