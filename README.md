@@ -44,10 +44,10 @@ Now, write some .json files for your localized strings:
 ```json
 en-US.json
 {
-    "greeting": "Welcome, %s, to planet",
-    "worlds": {
-        "earth": "Earth",
-        "mars": "Mars",
+    "greeting": "Hi, would you care for a cup of %s?",
+    "drinks": {
+        "tea": "tea",
+        "coffee": "coffee"
     }
 }
 ```
@@ -55,10 +55,10 @@ en-US.json
 ```json
 pt-BR.json
 {
-    "greeting": "Bem-vindo, %s, ao planeta",
-    "worlds": {
-        "earth": "Terra",
-        "mars": "Marte",
+    "greeting": "Olá, gostaria de uma xícara de %s?",
+    "drinks": {
+        "tea": "chá",
+        "coffee": "café"
     }
 }
 ```
@@ -79,9 +79,9 @@ import '<target directory>/modular_localization.dart';
 class MyWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    var greeting = ModularLocalization.localizations.hello(['Han Solo']);
-    var world = ModularLocalization.localizations.worlds.earth;
-    return Text('$greeting $world!'); // 'Welcome, Han Solo, to planet Earth!' or 'Bem-vindo, Han Solo, ao planeta Terra!' depending on the device's target Locale.
+    var drink = ModularLocalization.localizations.drinks.coffee;
+    var greeting = ModularLocalization.localizations.greeting([drink]);
+    return Text('$greeting $world!'); // 'Olá, gostaria de uma xícara de café?' or 'Hi, would you care for a cup of coffee?' depending on the device's target Locale.
   }
 }
 ```
